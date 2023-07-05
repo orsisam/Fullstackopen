@@ -3,15 +3,15 @@ import { useState } from 'react';
 /**
  * Display the counter
  */
-const Display = (props) => {
-  return <div>{props.counter}</div>;
+const Display = ({ counter }) => {
+  return <div>{counter}</div>;
 };
 
 /**
  * Create Button element
  */
-const Button = (props) => {
-  return <button onClick={props.handleClick}>{props.text}</button>;
+const Button = ({ handleClick, text }) => {
+  return <button onClick={handleClick}>{text}</button>;
 };
 
 const App = () => {
