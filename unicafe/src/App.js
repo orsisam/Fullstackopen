@@ -12,30 +12,72 @@ const DisplayStatictics = ({ value, text }) => {
   );
 };
 
+const DisplayPositivePercentage = ({ value, text }) => {
+  return (
+    <p>
+      {text} {value} %
+    </p>
+  );
+};
+
 const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+  const [totalFeedback, setTotalFeedback] = useState(0);
+  const [average, setAverage] = useState(0);
+  const [positivePercentage, setPositivePercentage] = useState(0);
+
+  const countAverage = (good, neutral, bad, totalFeedback) => {
+    return (good * 1 + neutral * 0 + bad * -1) / totalFeedback;
+  };
+
+  const countPercentage = (good, totalFeedback) => {
+    return (good / totalFeedback) * 100;
+  };
 
   /**
    * Handling the Good button
    */
   const handleGoodButton = () => {
-    setGood(good + 1);
+    const newGood = good + 1;
+    setGood(newGood);
+    const newTotalFeedback = totalFeedback + 1;
+    setTotalFeedback(newTotalFeedback);
+    const newAverage = countAverage(newGood, neutral, bad, newTotalFeedback);
+    setAverage(newAverage);
+    const newPositivePersentage = countPercentage(newGood, newTotalFeedback);
+    setPositivePercentage(newPositivePersentage);
   };
 
   /**
    * Handling the Neutral button
    */
   const handleNeutralButton = () => {
-    setNeutral(neutral + 1);
+    const newNeutral = neutral + 1;
+    const newTotalFeedback = totalFeedback + 1;
+    const newAverage = countAverage(good, newNeutral, bad, newTotalFeedback);
+    const newPositivePersentage = countPercentage(good, newTotalFeedback);
+
+    setNeutral(newNeutral);
+    setTotalFeedback(newTotalFeedback);
+    setAverage(newAverage);
+    setPositivePercentage(newPositivePersentage);
   };
 
   /**
    * Handling the Bad Button
    */
   const handleBadButton = () => {
-    setBad(bad + 1);
+    const newBad = bad + 1;
+    const newTotalFeedback = totalFeedback + 1;
+    const newAverage = countAverage(good, neutral, newBad, newTotalFeedback);
+    const newPositivePersentage = countPercentage(good, newTotalFeedback);
+
+    setBad(newBad);
+    setTotalFeedback(newTotalFeedback);
+    setAverage(newAverage);
+    setPositivePercentage(newPositivePersentage);
   };
 
   /**
@@ -45,7 +87,14 @@ const App = () => {
     setGood(0);
     setNeutral(0);
     setBad(0);
+    setTotalFeedback(0);
+    setAverage(0);
+    setPositivePercentage(0);
   };
+
+  /**
+   * The averge of feedback
+   */
 
   return (
     <div>
@@ -65,6 +114,9 @@ const App = () => {
       <DisplayStatictics value={good} text={'good'} />
       <DisplayStatictics value={neutral} text={'neutral'} />
       <DisplayStatictics value={bad} text={'bad'} />
+      <DisplayStatictics value={totalFeedback} text={'all'} />
+      <DisplayStatictics value={average} text={'average'} />
+      <DisplayPositivePercentage value={positivePercentage} text={'positive'} />
 
       <Button handleButton={handleResetButton} text={'reset'} />
     </div>
