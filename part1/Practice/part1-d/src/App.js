@@ -18,6 +18,13 @@ const Button = ({ handleClick, text }) => {
   return <button onClick={handleClick}>{text}</button>;
 };
 
+const TestButton = () => {
+  console.log('clicked the button test');
+};
+
+/**
+ * Main Application
+ */
 const App = () => {
   const [clicks, setClicks] = useState({
     left: 0,
@@ -82,6 +89,7 @@ const App = () => {
         <strong>Total of clicks: </strong>
         {total}
       </p>
+      <button onClick={TestButton}>test button</button>
     </div>
   );
 };
