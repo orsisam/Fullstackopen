@@ -28,6 +28,17 @@ const Statistics = ({
   average,
   positivePercentage,
 }) => {
+  if (totalFeedback === 0) {
+    return (
+      <>
+        <div className='subtitle'>
+          <h2>statistics</h2>
+        </div>
+        <p>No feedback given</p>
+      </>
+    );
+  }
+
   return (
     <>
       <div className='subtitle'>
