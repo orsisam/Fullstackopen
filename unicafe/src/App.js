@@ -20,6 +20,29 @@ const DisplayPositivePercentage = ({ value, text }) => {
   );
 };
 
+const Statistics = ({
+  good,
+  neutral,
+  bad,
+  totalFeedback,
+  average,
+  positivePercentage,
+}) => {
+  return (
+    <>
+      <div className='subtitle'>
+        <h2>statistics</h2>
+      </div>
+      <DisplayStatictics value={good} text={'good'} />
+      <DisplayStatictics value={neutral} text={'neutral'} />
+      <DisplayStatictics value={bad} text={'bad'} />
+      <DisplayStatictics value={totalFeedback} text={'all'} />
+      <DisplayStatictics value={average} text={'average'} />
+      <DisplayPositivePercentage value={positivePercentage} text={'positive'} />
+    </>
+  );
+};
+
 const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
@@ -108,15 +131,14 @@ const App = () => {
         <Button handleButton={handleBadButton} text={'bad'} />
       </div>
 
-      <div className='subtitle'>
-        <h2>statistics</h2>
-      </div>
-      <DisplayStatictics value={good} text={'good'} />
-      <DisplayStatictics value={neutral} text={'neutral'} />
-      <DisplayStatictics value={bad} text={'bad'} />
-      <DisplayStatictics value={totalFeedback} text={'all'} />
-      <DisplayStatictics value={average} text={'average'} />
-      <DisplayPositivePercentage value={positivePercentage} text={'positive'} />
+      <Statistics
+        good={good}
+        neutral={neutral}
+        bad={bad}
+        totalFeedback={totalFeedback}
+        average={average}
+        positivePercentage={positivePercentage}
+      />
 
       <Button handleButton={handleResetButton} text={'reset'} />
     </div>
