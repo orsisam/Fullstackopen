@@ -1,21 +1,24 @@
 import { useState } from 'react';
 
+/**
+ * For defining the buttons used for submitting feedback
+ */
 const Button = ({ handleButton, text }) => {
   return <button onClick={handleButton}>{text}</button>;
 };
 
-const DisplayStatictics = ({ value, text }) => {
+const StatisticLine = ({ value, text }) => {
+  if (text === 'positive') {
+    return (
+      <p>
+        {text} {value} %
+      </p>
+    );
+  }
+
   return (
     <p>
       {text} {value}
-    </p>
-  );
-};
-
-const DisplayPositivePercentage = ({ value, text }) => {
-  return (
-    <p>
-      {text} {value} %
     </p>
   );
 };
@@ -44,12 +47,12 @@ const Statistics = ({
       <div className='subtitle'>
         <h2>statistics</h2>
       </div>
-      <DisplayStatictics value={good} text={'good'} />
-      <DisplayStatictics value={neutral} text={'neutral'} />
-      <DisplayStatictics value={bad} text={'bad'} />
-      <DisplayStatictics value={totalFeedback} text={'all'} />
-      <DisplayStatictics value={average} text={'average'} />
-      <DisplayPositivePercentage value={positivePercentage} text={'positive'} />
+      <StatisticLine value={good} text={'good'} />
+      <StatisticLine value={neutral} text={'neutral'} />
+      <StatisticLine value={bad} text={'bad'} />
+      <StatisticLine value={totalFeedback} text={'all'} />
+      <StatisticLine value={average} text={'average'} />
+      <StatisticLine value={positivePercentage} text={'positive'} />
     </>
   );
 };
